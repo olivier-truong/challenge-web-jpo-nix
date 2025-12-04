@@ -1,0 +1,10 @@
+services:
+  challwebjponix:
+    name: challwebjponix
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    command: python app.py
+    restart: unless-stopped
