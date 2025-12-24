@@ -5,6 +5,12 @@ from random import randbytes
 from base64 import b64encode, b64decode
 
 def load_tokens():
+    if not os.path.exists("tokens.json"):
+        initial_data = {
+            "valid_tokens": {},
+            "tokens_history": {}
+        }
+        open("tokens.json", "wb").write(dumps(initial_data).encode())
     return loads(open("tokens.json", "rb").read().decode())
 
 app = Flask(__name__)
@@ -70,9 +76,29 @@ def index():
             secure=True
         )
         return r
-
-    return render_template("already_give.html",
-                           eventId=app.config["eventId"])
+    # --- Si utilisateur a déjà un token ---
+    else:
+        if user_token_id in get_valid_tokens():
+            return render_template("index.html",
+                eventId=app.config["eventId"],
+                tokenRandomIci=b64encode(b64encode(b64encode(get_valid_tokens()[user_token_id][10:].encode()))).decode())
+        else:
+            token_id, token_value = create_token()
+            get_valid_tokens()[token_id] = token_value
+            save_tokens()
+            r = make_response(
+            render_template("index.html",
+                eventId=app.config["eventId"],
+                tokenRandomIci=b64encode(b64encode(b64encode(token_value[10:].encode()))).decode())
+            )
+            r.set_cookie(
+                "token_id",
+                token_id,
+                max_age=60*60*24*365*2,
+                httponly=True,
+                secure=True
+            )
+            return r
 
 
 @app.route('/verify')
