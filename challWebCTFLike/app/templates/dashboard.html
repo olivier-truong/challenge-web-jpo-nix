@@ -1,0 +1,54 @@
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Web JPO Nix</title>
+
+    <!-- simple.css -->
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            max-width: 420px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .flash.success { color: #2ecc71; }
+        .flash.warning { color:#ea7d10;  }
+        .flash.error   { color: #e62813; }
+
+        input[type="submit"] {
+            width: 100%;
+        }
+
+        .tab {
+            display: flex;
+        }
+        .tab a {
+            padding: 20px;
+            text-decoration: none;
+            font-size: 15pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="tab">
+            <a href="/profil">Profile</a>
+            <a href="https://cdn.glz.ovh/rr" _blank>Flag La</a>
+            <a href="{{ pathTo }}" {{ hidden }}>{{ titleTo }}</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+    </div>
+</body>
+</html>

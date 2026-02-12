@@ -1,0 +1,18 @@
+services:
+  rce-web-inter:
+    image: rce-web-inter
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "0.0.0.0:8085:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 384M
+    restart: unless-stopped
+    environment:
+      - FLAG_FILE=/run/flag.txt
+    volumes:
+      - ./FLAGS/flag.txt:/run/flag.txt:ro
