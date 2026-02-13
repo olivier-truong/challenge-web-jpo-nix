@@ -2,9 +2,10 @@ services:
   challwebjponix:
     container_name: challwebjponix
     build: .
-    ports:
-      - "8080:8080"
-
+    #ports:
+    #  - "8080:8080"
+    network_mode: host
     command: python app.py
 
     restart: unless-stopped
+
