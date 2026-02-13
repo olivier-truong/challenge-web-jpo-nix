@@ -15,7 +15,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY app/ .
 COPY FLAGS/flag.txt /var/.flag.txt
 RUN chown -R root:root /home/ctfuser/app /var/.flag.txt
-EXPOSE 8080
+EXPOSE 38081
 
 USER ctfuser
 CMD ["python", "app.py"]
