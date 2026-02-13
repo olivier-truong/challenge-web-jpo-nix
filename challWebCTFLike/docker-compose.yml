@@ -4,8 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "0.0.0.0:8085:8080"
+#    ports:
+#      - "0.0.0.0:38081:38081"
+    network_mode: host
     deploy:
       resources:
         limits:
